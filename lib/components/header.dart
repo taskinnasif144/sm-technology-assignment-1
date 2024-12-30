@@ -12,7 +12,7 @@ class Header extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Hello Rafsan",style: GoogleFonts.getFont('Roboto', fontSize: 20), ),
+            Text("Hello Dewan",style: GoogleFonts.getFont('Roboto', fontSize: 20), ),
             Opacity(opacity: 0.5, child: Text("Let's watch today", style: GoogleFonts.getFont('Roboto', fontSize: 14,)),)
           ],
         ),

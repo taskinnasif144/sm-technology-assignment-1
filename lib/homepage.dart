@@ -1,86 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:netflix/components/categories.dart';
-import 'package:netflix/components/continueWatching.dart';
-import 'package:netflix/components/floating_bottom_bar.dart';
-import 'package:netflix/components/header.dart';
-import 'package:netflix/components/search.dart';
-import 'package:netflix/components/sectionCarousel.dart';
-import 'package:netflix/components/sliding_shows.dart';
-import 'package:netflix/constants.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:netflix/models/routes_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              child: BodyContent(),
-            ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: FloatingBottomBar()
-            )
-          ],
-        ),
+    return SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Assignments"),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AssignmentNavigation(route:Routes.assignment1, buttonName: "Assignment 1",),
+          AssignmentNavigation(route:Routes.assignment2, buttonName: "Assignment 2",),
+          AssignmentNavigation(route:Routes.assignment3, buttonName: "Assignment 3",)
+        ],
       ),
-    );
+    ));
   }
 }
 
+class AssignmentNavigation extends StatelessWidget {
+  const AssignmentNavigation({
+    super.key,
+    required this.route,
+    required this.buttonName
+  });
 
-class BodyContent extends StatelessWidget {
-  const BodyContent({super.key});
+  final String route;
+  final String buttonName;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Header(),
-          SizedBox(
-            height: 20,
-          ),
-          Search(),
-          SizedBox(
-            height: 20,
-          ),
-          Categories(),
-          SizedBox(
-            height: 20,
-          ),
-          SectionCarousel(),
-          SizedBox(
-            height: 20,
-          ),
-          SlidingShows(
-            headerText: "Trending Movies",
-            movies: trendingMovies,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ContinueWatching(),
-          SizedBox(
-            height: 20,
-          ),
-          SlidingShows(
-            headerText: "Recommended For You",
-            movies: recommendedMovies,
-          ),
-          SizedBox(
-            height: 100,
-          ),
-        ],
+    return Center(
+      child: FractionallySizedBox(
+        widthFactor: 0.8,
+        child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(
+                  Theme.of(context).colorScheme.primary),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, route);
+            },
+            child: Text(
+              buttonName,
+              style: GoogleFonts.getFont("Roboto",
+                  fontSize: 18, color: Colors.white),
+            )),
       ),
     );
   }
 }
-
 
 //Center(child: Text("HI"),);
